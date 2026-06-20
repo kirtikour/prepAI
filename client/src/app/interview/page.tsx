@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
 import Editor from '@monaco-editor/react';
+import { API_BASE_URL } from '@/config';
 
 const JOB_ROLES = [
   'Software Engineer',
@@ -447,7 +448,7 @@ export default function InterviewPage() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('http://localhost:5000/api/interview/start', {
+      const res = await fetch(`${API_BASE_URL}/api/interview/start`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ role }),
@@ -504,7 +505,7 @@ export default function InterviewPage() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('http://localhost:5000/api/interview/answer', {
+      const res = await fetch(`${API_BASE_URL}/api/interview/answer`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -539,7 +540,7 @@ export default function InterviewPage() {
       // Fetch summary from complete endpoint
       setLoading(true);
       try {
-        const res = await fetch('http://localhost:5000/api/interview/complete', {
+        const res = await fetch(`${API_BASE_URL}/api/interview/complete`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ sessionId }),
@@ -562,7 +563,7 @@ export default function InterviewPage() {
       // Retrieve next question by updating local index
       setLoading(true);
       try {
-        const res = await fetch(`http://localhost:5000/api/interview/complete`, {
+        const res = await fetch(`${API_BASE_URL}/api/interview/complete`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ sessionId }),

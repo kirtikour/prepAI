@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
+import { API_BASE_URL } from '@/config';
 
 const JOB_ROLES = [
   'Software Engineer',
@@ -89,7 +90,7 @@ export default function ResumePage() {
     if (!user) return;
     const fetchLatestResume = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/resume/latest', {
+        const res = await fetch(`${API_BASE_URL}/api/resume/latest`, {
           credentials: 'include',
         });
         const data = await res.json();
@@ -175,7 +176,7 @@ export default function ResumePage() {
     }, 150);
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:5000/api/resume/upload', true);
+    xhr.open('POST', `${API_BASE_URL}/api/resume/upload`, true);
     xhr.withCredentials = true;
 
     xhr.onload = () => {
@@ -843,7 +844,7 @@ export default function ResumePage() {
                   setApplyingFix(true);
                   setError(null);
                   try {
-                    const res = await fetch('http://localhost:5000/api/resume/apply-fix', {
+                    const res = await fetch(`${API_BASE_URL}/api/resume/apply-fix`, {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json',

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
+import { API_BASE_URL } from '@/config';
 import {
   ResponsiveContainer,
   LineChart,
@@ -108,25 +109,25 @@ export default function PerformancePage() {
         setErrorMsg(null);
 
         // Fetch score trend
-        const trendRes = await fetch('http://localhost:5000/api/analytics/score-trend', {
+        const trendRes = await fetch(`${API_BASE_URL}/api/analytics/score-trend`, {
           credentials: 'include',
         });
         const trendResult = await trendRes.json();
 
         // Fetch category scores
-        const catRes = await fetch('http://localhost:5000/api/analytics/by-category', {
+        const catRes = await fetch(`${API_BASE_URL}/api/analytics/by-category`, {
           credentials: 'include',
         });
         const catResult = await catRes.json();
 
         // Fetch resume score history
-        const resumeRes = await fetch('http://localhost:5000/api/analytics/resume-history', {
+        const resumeRes = await fetch(`${API_BASE_URL}/api/analytics/resume-history`, {
           credentials: 'include',
         });
         const resumeResult = await resumeRes.json();
 
         // Fetch paginated sessions
-        const sessionsRes = await fetch(`http://localhost:5000/api/analytics/sessions?page=${currentPage}&limit=5`, {
+        const sessionsRes = await fetch(`${API_BASE_URL}/api/analytics/sessions?page=${currentPage}&limit=5`, {
           credentials: 'include',
         });
         const sessionsResult = await sessionsRes.json();

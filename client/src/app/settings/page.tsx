@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
+import { API_BASE_URL } from '@/config';
 
 export default function SettingsPage() {
   const { user, loading: authLoading, logout, checkUserStatus } = useAuth();
@@ -74,7 +75,7 @@ export default function SettingsPage() {
     setProfileLoading(true);
 
     try {
-      const res = await fetch('http://localhost:5000/api/auth/update', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/update`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email }),
@@ -115,7 +116,7 @@ export default function SettingsPage() {
 
     setSecurityLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/auth/update', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/update`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ currentPassword, newPassword }),

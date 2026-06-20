@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
+import { API_BASE_URL } from '@/config';
 
 interface DashboardStats {
   resumeScore: number | null;
@@ -55,13 +56,13 @@ export default function DashboardPage() {
         setStatsError(null);
 
         // Fetch stats
-        const statsRes = await fetch('http://localhost:5000/api/dashboard/stats', {
+        const statsRes = await fetch(`${API_BASE_URL}/api/dashboard/stats`, {
           credentials: 'include',
         });
         const statsData = await statsRes.json();
 
         // Fetch activity
-        const activityRes = await fetch('http://localhost:5000/api/dashboard/activity', {
+        const activityRes = await fetch(`${API_BASE_URL}/api/dashboard/activity`, {
           credentials: 'include',
         });
         const activityData = await activityRes.json();
